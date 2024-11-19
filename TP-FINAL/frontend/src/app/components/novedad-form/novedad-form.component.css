@@ -1,0 +1,37 @@
+.form-select-dm {
+  height: 35px; /* Ejemplo de clase para un tamaño aún más pequeño */
+  font-size: 12px; /* Ejemplo de tamaño de fuente más pequeño */
+}
+
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.titulo-novedades {
+  color: #001f3f; /* Color marino */
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.textarea-novedad {
+  margin-top: 20px;
+  width: 50%; /* Ocupa la mitad del ancho */
+  border-radius: 0; /* Rectangular */
+  background-color: #f0f0f0; /* Color gris claro */
+  border: 1px solid #ccc; /* Borde gris */
+  margin-bottom: 20px;
+  height: 150px; /* Altura específica */
+}
+
+.btn-enviar {
+  border-radius: 0; /* Rectangular */
+  background-color: #001f3f; /* Color marino */
+  border: none; /* Quita el borde del botón */
+  padding: 10px 20px;
+}
+
+.btn-enviar:focus,
+.btn-enviar:hover {
+  background-color: #003366; /* Cambio de color al hacer hover */
+}

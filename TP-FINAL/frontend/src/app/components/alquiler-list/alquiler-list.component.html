@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Listado de Alquileres</h2>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Plazo (Meses)</th>
+        <th>Costo de Alquiler</th>
+        <th>Fecha</th>
+        <th>Local</th>
+        <th>Propietario</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let alquiler of alquileres">
+        <td>{{ alquiler._id }}</td>
+        <td>{{ alquiler.plazoMeses }}</td>
+        <td>{{ alquiler.costoalquiler }}</td>
+        <td>{{ alquiler.fecha | date }}</td>
+        <td>{{ alquiler.local.titulo }}</td>
+        <td>{{ alquiler.propietario.nombre }} {{ alquiler.propietario.apellido }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="eliminarAlquiler(alquiler._id)">Eliminar</button>
+          <a class="btn btn-primary" [routerLink]="'/alquileres/editar/' + alquiler._id">Editar</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

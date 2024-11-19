@@ -1,0 +1,49 @@
+
+<h1 class="text-center">Locales</h1>
+<div class="d-flex justify-content-center mb-3">
+<div class="input-group mb-3 justify-content-center" style="width: 700px;">
+  <span class="input-group-text" id="basic-addon1" style="background-color: rgb(255, 187, 0);">Filtrar por</span>
+  <select  class="form-select" aria-label="Default select example" [(ngModel)]="filtro"  id="filtro" name="filtro"  (change)="ObtenerLocales()" >
+    <option value="alquil">Alquilados</option>
+    <option value="disp">Disponibles</option>
+    <option value="noHabil">No habilitados</option><!--Opcion solo para el Administrador-->
+    <option value="todos">Todos</option>
+  </select>
+</div>
+</div>
+<div class="row">
+<div *ngFor="let local of locales;let i = index" class="col-4" style="padding:70px;">
+  <div class="card" style="width:375px; margin-bottom:5px;">  
+   <div class="card-body">
+    <h5 class="card-title">{{local.titulo}}</h5>
+    <img src="{{local.imagen}}" alt="" class="card-img-top">
+    <p class="card-text">Direccion: {{local.direccion}}</p>
+    <p class="card-text">Superficie: {{local.superficie}}m²</p>
+    <p class="card-text">Nro Local:{{local.nroLocal}}</p>
+    <p class="card-text">Precio:{{local.precio}}</p><!--si esta alquilado y es cliente no se muestra-->
+ </div>
+  <button *ngIf="local.alquilado===false && local.habilitado===true" type="button" class="btn btn-danger d-flex justify-content-center text-center" style="margin-top: 10px;">Alquilar</button>
+  <button type="button" class="btn btn-warning d-flex justify-content-center text-center" *ngIf="
+  ['administrativo', 'dueño'].includes(
+    loginService.getUserRole() || ''
+  )
+"(click)="EliminarLocal(local._id)" style="margin-top: 10px;">Eliminar</button>
+ <button type="button" class="btn btn-primary d-flex justify-content-center text-center" *ngIf="
+ ['administrativo', 'dueño'].includes(
+   loginService.getUserRole() || ''
+ )
+"(click)="ModificarLocal(local._id)" style="margin-top: 10px;">Modificar</button>
+
+</div>
+
+</div>
+</div>
+<button type="button" class="btn btn-primary"*ngIf="
+['administrativo', 'dueño'].includes(
+  loginService.getUserRole() || ''
+)
+"(click)="agregarLocal()" style="margin-left: 45%;">Agregar</button>
+
+
+
+

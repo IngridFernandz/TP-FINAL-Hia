@@ -1,0 +1,24 @@
+.footer-section {
+  padding: 1rem 0;
+  background-color: #002147; /* Puedes ajustar el color de fondo */
+  color: #fff;
+}
+
+.footer-text {
+  margin: 0.5rem 0;
+}
+
+.social-icons {
+  margin-top: 1rem;
+}
+
+.social-icons a {
+  color: #fff;
+  margin: 0 0.5rem;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #ddd; /* Cambia a un color más claro al pasar el ratón */
+}

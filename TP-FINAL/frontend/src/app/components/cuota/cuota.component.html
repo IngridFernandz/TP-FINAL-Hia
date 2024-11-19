@@ -1,0 +1,49 @@
+<!--div class="container-fluid">
+    <h3 class="text-center">Pagar</h3>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Local</span>
+        <select  class="form-select" aria-label="Default select example" [(ngModel)]="filtro"  id="filtro" name="filtro" (change)="ObtenerLocales()">
+        <select class="form-select">
+            <option value="local" *ngFor="let l of misLocales">{{l}}</option>
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Cuota N°</span>
+        <select class="form-select" name="cuotas" id="cuotas">
+            <option value="seleccione">Seleccione...</option>
+            <option value="cuota" *ngFor="let c of listadoCuotas">{{c}}</option>
+        </select>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="esAdelanto" [(ngModel)]="esAdelanto">
+        <label class="form-check-label" for="exampleCheck1">Adelanto</label>
+    </div>
+    <div class="mb-3" *ngIf="esAdelanto==true">
+        <label class="form-label" for="montoAdelanto">Monto: </label>
+        <input class="form-control" type="number" name="montoAdelanto" id="montoAdelanto">
+    </div>
+    <button type="submit" class="btn btn-primary">Realizar Pago</button>
+    <div>
+        <h4 class="text-center">Mis Pagos</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Monto</th>
+                    <th scope="col">Medio</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Detalle</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div-->

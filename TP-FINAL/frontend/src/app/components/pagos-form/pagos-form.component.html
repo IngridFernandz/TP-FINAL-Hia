@@ -1,0 +1,84 @@
+<div class="d-flex justify-content-center mb-3">
+<div class="input-group mb-3 justify-content-center" style="width: 700px;">
+  <span class="input-group-text" id="basic-addon1" style="background-color: rgb(255, 187, 0);">Seleccionar Propietario</span>
+  <select class="form-select" id="propietario" name="propietario" [(ngModel)]="id_prop" (change)="getAlquileres()" required>
+    <option *ngFor="let prop of Propietarios" [ngValue]="prop._id">{{ prop.dni }}</option>
+  </select>
+</div>
+</div>
+<div class="d-flex justify-content-center mb-3">
+<div class="input-group mb-3 justify-content-center" style="width: 700px;">
+  <span class="input-group-text" id="basic-addon1" style="background-color: rgb(255, 187, 0);">Seleccionar Alquiler</span>
+  <select class="d-flex justify-content-center mb-3"lect class="form-select" id="local" name="local" [(ngModel)]="id_alquiler"(change)="ObtnerCuotasByID()"  required>
+    <option *ngFor="let alquiler of Alquileres" [ngValue]="alquiler._id">{{ alquiler.local.titulo }}</option>
+  </select>
+</div>
+</div>
+
+<div *ngIf="cuotas.length > 0" class="input-group mb-3 justify-content-center" style="width: 700px;">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1" style="background-color: rgb(255, 187, 0);">Monto Cuota</span>
+    <label for="cuotamonto" class="form-label">{{ montoCuota }}</label>
+  </div>
+</div>
+
+<div *ngIf="cuotas.length > 0" class="input-group mb-3 justify-content-center" style="width: 700px;">
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1" style="background-color: rgb(255, 187, 0);">Monto Pagado</span>
+    <label for="cuotamonto" class="form-label">{{ montoPagado }}</label>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <h2>Cuota</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Mes</th>
+        <th>Monto</th>
+        <th>Número de Cuota</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody (change)="ObtnerCuotasByID()">
+      <tr *ngFor="let cuota of cuotas">
+        <td>{{ cuota.mes }}</td>
+        <td>{{ cuota.monto }}</td>
+        <td>{{ cuota.nroCuota }}</td>
+        <td>{{ cuota.estado }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<div class="container mt-5">
+  <h2 class="mb-4">Realizar Pago</h2>
+  <form id="paymentForm">
+    <div class="mb-3">
+      <label for="monto" class="form-label">Monto</label>
+      <input type="number" class="form-control" name="monto" [(ngModel)]="pago.monto" id="monto"  placeholder="Ingrese el monto" required>
+    </div>
+    <div class="mb-3">
+      <label for="medioPago" class="form-label">Medio de Pago</label>
+      <select class="form-select" id="medioPago" required [(ngModel)]="pago.medioDePago" name="medioPago">
+        <option value="" disabled selected>Seleccione el medio de pago</option>
+        <option value="Tarjeta de Crédito">Tarjeta de Crédito</option>
+        <option value="Transferencia Bancaria">Transferencia Bancaria</option>
+        <option value="Mercado Pago">Mercado Pago</option>
+      </select>
+    </div>
+     
+      <button type="submit" class="btn btn-primary" (click)="generarPago()">Realizar Pago</button>
+      <button type="submit" class="btn btn-primary">Cancelar Pago</button>
+    </form>
+</div>
+<h4>Pagos:</h4>
+  <ul *ngIf="cuotActual.adelantos.length>0">
+    <li *ngFor="let pago of cuotActual.adelantos">
+      Monto: {{ pago.monto }}, Fecha: {{ pago.fechaDePago }}, Medio: {{ pago.medioDePago }}
+    </li>
+  </ul>

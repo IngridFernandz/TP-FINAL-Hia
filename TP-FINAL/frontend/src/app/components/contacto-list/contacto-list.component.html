@@ -1,0 +1,22 @@
+<div
+  class="consulta-card"
+  *ngFor="let c of consultas"
+  (click)="handleNotificationClick($event)"
+>
+  <h3 class="consulta-text">
+    {{ c.nombreCompleto }}
+  </h3>
+  <p>Email: {{ c.email }}</p>
+  <p>Consulta: {{ c.consulta }}</p>
+  <p class="consulta-negrita">
+    {{ c.estado == false ? "No leido" : "Leido" }}
+  </p>
+
+  <button
+    class="btn btn-resuelto"
+    (click)="actualizarContacto(c)"
+    *ngIf="c.estado == false"
+  >
+    Leido
+  </button>
+</div>

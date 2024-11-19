@@ -1,0 +1,23 @@
+.card {
+    width: 600px; 
+  height: auto;
+  flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s; 
+  }
+  
+  .card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 4px 20px rgba(17, 16, 16, 0.342); 
+  }
+  .card-img-top {
+    width: 340px; 
+    height: 300px; 
+    object-fit: cover;
+  }
+  .card-body {
+    font-size: 2rem!important;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+  h1{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }

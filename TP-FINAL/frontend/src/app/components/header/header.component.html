@@ -1,0 +1,249 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-body-tertiary fixed-top"
+  style="width: 100%"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">AKIRA SHOPPING</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li
+          class="nav-item"
+          *ngIf="
+            ['administrativo', 'dueño'].includes(
+              loginService.getUserRole() || ''
+            )
+          "
+        >
+          <a class="nav-link" [routerLink]="['propietario']">PROPIETARIO</a>
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="
+            ['administrativo', 'dueño','propietario'].includes(
+              loginService.getUserRole() || ''
+            )
+          "
+        >
+          <a class="nav-link" [routerLink]="['/locales', 'todos']">LOCAL</a>
+        </li>
+        <li
+          class="nav-item dropdown"
+          *ngIf="
+            ['administrativo', 'dueño', 'propietario'].includes(
+              loginService.getUserRole() || ''
+            )
+          "
+        >
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            ALQUILERES
+          </a>
+          <ul class="dropdown-menu">
+            <li
+              *ngIf="
+                ['administrativo', 'dueño', 'propietario'].includes(
+                  loginService.getUserRole() || ''
+                )
+              "
+            >
+              <a class="dropdown-item" [routerLink]="['alquileres']">Listar</a>
+            </li>
+            <li
+              *ngIf="
+                ['administrativo', 'dueño'].includes(
+                  loginService.getUserRole() || ''
+                )
+              "
+            >
+              <a class="dropdown-item" [routerLink]="['alquileres/crear']"
+                >Crear</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown" *ngIf="
+        ['administrativo', 'dueño', 'propietario'].includes(
+          loginService.getUserRole() || ''
+        )
+      ">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            PAGOS
+          </a>
+          <ul class="dropdown-menu">
+            <li
+              
+            >
+              <a class="dropdown-item" [routerLink]="['pagos']"
+                >Lista de Pagos</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="['/pagos-form', 'pendiente']"
+                >Realizar Pago</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            PROMOCIONES
+          </a>
+          <ul class="dropdown-menu">
+            <li>
+              <a class="dropdown-item" [routerLink]="['promocion']"
+                >Lista de Promociones</a
+              >
+            </li>
+            <li
+              *ngIf="['propietario'].includes(loginService.getUserRole() || '')"
+            >
+              <a class="dropdown-item" [routerLink]="['promocion-form', '0']"
+                >Registrar Promocion</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li
+          class="nav-item"
+          *ngIf="['propietario'].includes(loginService.getUserRole() || '')"
+        >
+          <a class="nav-link" [routerLink]="['novedad']">NOVEDAD</a>
+        </li>
+        <li class="nav-item" *ngIf="loginService.getUserRole() == ''">
+          <a class="nav-link" [routerLink]="['contacto']">CONTACTO</a>
+        </li>
+        <li class="nav-item" *ngIf="
+        ['administrativo', 'dueño'].includes(
+          loginService.getUserRole() || ''
+        )
+      ">
+          <a class="nav-link" [routerLink]="['panel-control']"
+            >PANEL DE CONTROL</a
+          >
+        </li>
+      </ul>
+
+      <div class="ml-auto">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- Mensajes de contacto -->
+
+          <li
+            class="nav-item dropdown"
+            *ngIf="
+              ['administrativo'].includes(loginService.getUserRole() || '')
+            "
+          >
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="messagesDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-envelope"></i>
+              <span class="badge bg-danger">{{ numeroMensajesNoLeidos }}</span>
+              <!-- icono con número de mensajes no leídos -->
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end consulta-dropdown"
+              aria-labelledby="messagesDropdown"
+            >
+              <li>
+                <app-contacto-list></app-contacto-list>
+                <!-- Componente para mostrar mensajes -->
+              </li>
+            </ul>
+          </li>
+
+          <!-- Notificaciones de novedades -->
+
+          <li
+            class="nav-item dropdown"
+            *ngIf="
+              ['administrativo'].includes(loginService.getUserRole() || '')
+            "
+          >
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="notificationsDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <i class="fas fa-bell"></i>
+              <span class="badge bg-danger">{{
+                numeroNotificacionesNoLeidas
+              }}</span>
+            </a>
+            <ul
+              class="dropdown-menu dropdown-menu-end consulta-dropdown"
+              aria-labelledby="notificationsDropdown"
+            >
+              <li>
+                <app-novedad></app-novedad>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link btn account-button"
+              *ngIf="!loginService.userLoggedIn()"
+              [routerLink]="['login']"
+            >
+              <i class="fas fa-user"></i> Ingresar
+            </a>
+            <a
+              class="nav-link btn btn-danger"
+              *ngIf="loginService.userLoggedIn()"
+              [routerLink]="['login']"
+              (click)="logout()"
+            >
+              {{ loginService.userLogged() }} (logout)
+            </a>
+          </li>
+          <li
+            class="nav-item"
+            *ngIf="['dueño'].includes(loginService.getUserRole() || '')"
+          >
+            <a class="nav-link btn register-button" [routerLink]="['registrar']"
+              >Registrar Usuario</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

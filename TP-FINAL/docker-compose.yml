@@ -1,0 +1,56 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/proyectodb
+    depends_on:
+      - mongo
+
+ 
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "4200:80"
+    networks:
+      - app-network
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app-network
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017/proyectodb
+      - ME_CONFIG_OPTIONS_EDITORTHEME=monokai
+      - ME_CONFIG_SITE_ADMIN_USERNAME=admin
+      - ME_CONFIG_SITE_ADMIN_PASSWORD=pass
+    ports:
+      - "8081:8081"
+    networks:
+      - app-network
+    depends_on:
+      - mongo
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+    driver: local
