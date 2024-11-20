@@ -44,6 +44,27 @@ services:
     depends_on:
       - mongo
 
+  backup:
+    image: mongo:latest
+    container_name: mongo-backup
+    depends_on:
+      - mongo
+    networks:
+      - app-network
+    volumes:
+      - ./backups:/backups
+      - /etc/localtime:/etc/localtime:ro  # Mapea la hora local del sistema al contenedor
+    environment:
+      - TZ=America/Argentina/Buenos_Aires  # Establece la zona horaria manualmente
+    entrypoint: >
+      /bin/sh -c "
+      while true; do
+        mongodump --host mongo --out /backups/$(date +%Y-%m-%d-%H-%M-%S);
+        sleep 86400;
+      done
+      "
+
+
 networks:
   app-network:
     driver: bridge
