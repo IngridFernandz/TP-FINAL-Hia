@@ -20,8 +20,8 @@ jobs:
       - name: Build and push Backend
         uses: docker/build-push-action@v5
         with:
-          context: ./backend
-          file: ./backend/Dockerfile
+          context: ./TP-FINAL-Mio/backend
+          file: ./TP-FINAL-Mio/backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/backendhia:latest
   build-frontend:
@@ -39,7 +39,7 @@ jobs:
       - name: Build and push Frontend
         uses: docker/build-push-action@v5
         with:
-          context: ./frontend
-          file: ./frontend/Dockerfile
+          context: ./TP-FINAL-Mio/frontend
+          file: ./TP-FINAL-Mio/frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/frontendhia:latest
