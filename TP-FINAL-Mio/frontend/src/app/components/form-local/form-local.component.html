@@ -1,0 +1,46 @@
+<div class="container">
+    <h1 >Formulario de Local</h1>
+    <form  >
+          <div class="mb-3">
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Titulo</label>
+                <input required [(ngModel)]="local.titulo" type="text" class="form-control" id="nombre" name="nombre">
+              </div>
+              <div class="mb-3">
+                <label for="direccion" class="form-label">Direccion</label>
+                <input required [(ngModel)]="local.direccion" type="text" class="form-control" id="direccion" name="direccion">
+              </div>
+            <div class="mb-3">
+              <label for="precio" class="form-label">Precio del Local</label>
+              <input required #precioTicket="ngModel" [(ngModel)]="local.precio"  type="number" class="form-control" id="precioLocal" name="precioLocal">
+              <div *ngIf="precioTicket.invalid && (precioTicket.dirty || precioTicket.touched)" class="alert alert-danger">
+                  <div *ngIf="precioTicket.errors?.['required']"> Numero de precio es necesario. </div>
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="superficie" class="form-label">Superficie</label>
+                <input required  [(ngModel)]="local.superficie"  type="number" class="form-control" id="superficie" name="superficie">
+            </div>
+            <div class="mb-3">
+              <label for="precio" class="form-label">Numero de Local</label>
+              <input required  [(ngModel)]="local.nroLocal"  type="number" class="form-control" id="nroLocal" name="nroLocal">
+            </div>
+            <div class="mb-3">
+                <label for="fileInput" class="form-label">Imagen de Local</label>
+                <div class="input-group">
+                  <input required type="file" class="form-control rounded-pill form-control-sm" id="fileInput" accept="image/*"
+                    name="imagen" (change)="onFileSelected($event)"> 
+                </div> 
+                <img *ngIf="accion=='update'" src={{local.imagen}}>
+              </div>
+              <div class="mb-3 form-check">
+                <label class="form-check-label" for="exampleCheck1">Habilitado</label>
+                <input type="checkbox" [(ngModel)]="local.habilitado" class="form-check-input" id="exampleCheck1" name="habilitado" >
+              </div>
+          <button  *ngIf="accion=='new'"  type="submit" class="btn btn-primary" (click)="Registrar()">Agregar Local</button>
+          <button *ngIf="accion=='update'" type="submit" class="btn btn-primary" (click)="Registrar()">Actualizar Local</button>
+    
+        </div>
+        </form>
+      </div>
+    

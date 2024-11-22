@@ -1,0 +1,75 @@
+.container {
+  margin-top: 20px; /* Margen superior */
+  margin-bottom: 20px; /* Margen inferior */
+}
+
+/* Estilos para los input y textarea */
+.form-control {
+  border-radius: 0; /* Hace los inputs rectangulares */
+  background-color: #f0f0f0; /* Fondo gris claro */
+  border: 1px solid #ccc; /* Borde gris */
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+/* Estilo específico para el textarea */
+textarea.form-control {
+  min-height: 150px; /* Ajusta el tamaño del textarea */
+}
+
+/* Ajustes para el botón */
+.btn-primary {
+  border-radius: 0; /* Hace el botón rectangular */
+  background-color: #001f3f; /* Color marino */
+  border: none; /* Quita el borde del botón */
+  margin-top: 10px; /* Margen superior */
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: #003366; /* Cambio de color al hacer hover */
+}
+
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  border-radius: 0;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+textarea.form-control {
+  min-height: 150px;
+}
+
+.btn-primary {
+  border-radius: 0;
+  background-color: #001f3f;
+  border: none;
+  margin-top: 10px;
+}
+
+.btn-primary:focus,
+.btn-primary:hover {
+  background-color: #003366;
+}
+
+.ubicacion,
+.como-llegar {
+  margin-bottom: 20px;
+}
+
+.ubicacion h3,
+.como-llegar h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.colectivos {
+  margin-top: 10px;
+  color: #000;
+}

@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="text-center mb-4">Editar Alquiler</h2>
+          <form (submit)="guardarCambios()">
+            <div class="mb-3">
+              <label for="plazoMeses" class="form-label">Plazo (Meses):</label>
+              <input type="number" id="plazoMeses" name="plazoMeses" [(ngModel)]="alquiler.plazoMeses" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="costoalquiler" class="form-label">Costo de Alquiler:</label>
+              <input type="number" id="costoalquiler" name="costoalquiler" [(ngModel)]="alquiler.costoalquiler" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="fecha" class="form-label">Fecha:</label>
+              <input type="date" id="fecha" name="fecha" [(ngModel)]="alquiler.fecha" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="local" class="form-label">Local:</label>
+              <select class="form-select" id="local" name="local" [(ngModel)]="alquiler.local._id" required>
+                <option *ngFor="let local of locales" [ngValue]="local._id">{{ local.titulo }}</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label for="propietario" class="form-label">Propietario:</label>
+              <select class="form-select" id="propietario" name="propietario" [(ngModel)]="alquiler.propietario._id" required>
+                <option *ngFor="let propietario of propietarios" [ngValue]="propietario._id">{{ propietario.apellido }}, {{ propietario.nombre }}</option>
+              </select>
+            </div>
+
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

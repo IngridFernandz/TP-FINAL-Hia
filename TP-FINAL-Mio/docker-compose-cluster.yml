@@ -1,0 +1,67 @@
+services:
+  mongo1:
+    image: mongo:5
+    container_name: mongo1
+    command: mongod --replSet myReplicaSet --bind_ip localhost,mongo1
+    networks:
+      - mongoCluster
+
+    ports:
+      - "27017:27017"
+
+  mongo2:
+    image: mongo:5
+    container_name: mongo2
+    command: mongod --replSet myReplicaSet --bind_ip localhost,mongo2
+    networks:
+      - mongoCluster
+
+    ports:
+      - "27018:27017"
+
+  mongo3:
+    image: mongo:5
+    container_name: mongo3
+    command: mongod --replSet myReplicaSet --bind_ip localhost,mongo3
+    networks:
+      - mongoCluster
+
+    ports:
+      - "27019:27017"
+
+  mongo_exporter:
+    image: bitnami/mongodb-exporter:latest
+    container_name: mongo_exporter
+    environment:
+      - MONGODB_URI=mongodb://mongo1:27017,mongo2:27017,mongo3:27017
+    ports:
+      - "9216:9216"
+    networks:
+      - mongoCluster
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - mongoCluster
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    ports:
+      - "3009:3009"
+    networks:
+      - mongoCluster
+    depends_on:
+      - prometheus
+
+networks:
+  mongoCluster:
+    driver: bridge
+

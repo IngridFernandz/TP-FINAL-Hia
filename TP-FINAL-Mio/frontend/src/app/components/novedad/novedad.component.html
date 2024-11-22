@@ -1,0 +1,26 @@
+<div
+  class="consulta-card"
+  *ngFor="let n of novedades"
+  (click)="handleNotificationClick($event)"
+>
+  <h3 class="consulta-text">
+    {{ n.local?.titulo }} - Local: {{ n.local?.nroLocal }}
+  </h3>
+  <p>Consulta: {{ n.descripcion }}</p>
+  <p>
+    {{ n.fechaCreacion | date : "dd/MM/yyyy" }}
+  </p>
+  <p class="consulta-negrita">
+    {{ n.estado == false ? "En proceso" : "Resuelto" }}
+  </p>
+  <p *ngIf="n.estado == true">
+    Fecha finalizacion: {{ n?.fechaFinalizacion | date : "dd/MM/yyyy" }}
+  </p>
+  <button
+    class="btn btn-resuelto"
+    (click)="actualizarNovedad(n)"
+    *ngIf="n.estado == false"
+  >
+    Resuelto
+  </button>
+</div>

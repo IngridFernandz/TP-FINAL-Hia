@@ -1,0 +1,65 @@
+body {
+  padding-top: 70px; /* Ajusta este valor según la altura de tu navbar */
+}
+nav.navbar {
+  width: 100%;
+  font-family: "Playfair Display", sans-serif;
+}
+
+/* styles.css o cualquier archivo CSS global */
+
+.navbar {
+  background-color: #94369563; /* Color del fondo del navbar */
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-family: "Playfair Display";
+  font-size: 2rem;
+  color: #002147;
+}
+
+.nav-link {
+  color: #333;
+}
+
+.nav-link:hover {
+  color: #ff7f00; /* Color naranja al pasar el cursor */
+}
+
+.account-button {
+  background-color: #ffffff; /* Color crema */
+  border: 1px solid transparent;
+  color: #333;
+  margin-right: 10px;
+}
+
+.account-button:hover {
+  background-color: #ff7f00; /* Color naranja al pasar el cursor */
+  color: #fff;
+}
+
+.register-button {
+  background-color: #002147; /* Azul marino */
+  border: 1px solid transparent;
+  color: #fff;
+}
+
+.register-button:hover {
+  background-color: #ff7f00; /* Color naranja al pasar el cursor */
+  color: #fff;
+}
+
+.navbar .dropdown-menu {
+  width: 300px; /* Ajusta el ancho según sea necesario */
+}
+
+.navbar .dropdown-menu a {
+  white-space: normal; /* Permite que el texto se envuelva */
+}
+
+/* Estilos para el despliegue de notificaciones */
+.consulta-dropdown {
+  max-height: 33rem; /* Altura máxima del desplegable */
+  overflow-y: auto; /* Añade scroll vertical si es necesario */
+}

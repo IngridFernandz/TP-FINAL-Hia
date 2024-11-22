@@ -1,0 +1,14 @@
+/* Ajuste el navbar para que sea fijo y tenga un z-index alto */
+.app-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #f8f9fa; /* Ajusta según el color de tu navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Opcional: agregar una sombra */
+}
+
+/* Asegúrate de que el contenido principal tenga un margen superior adecuado */
+.main-content {
+  margin-top: 70px; /* Ajusta este valor según la altura de tu navbar */
+}

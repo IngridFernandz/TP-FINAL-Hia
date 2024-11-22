@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <div class="row mb-3">
+    <div class="col">
+      <button class="btn btn-primary" (click)="getPropietarios()">Mostrar todos los Propietarios</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-success" (click)="createPropietario()">Crear Propietarios</button>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="col">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Apellido</th>
+            <th>Nombre</th>
+            <th>Dni</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of propietarios">
+            <td>{{ p?.apellido }}</td>
+            <td>{{ p?.nombre }}</td>
+            <td>{{ p?.dni }}</td>
+            <td>{{ p?.email}}</td>
+            <td>{{ p?.telefono}}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="editPropietario(p)">Modificar</button>
+              <button class="btn btn-danger btn-sm" (click)="deletePropietario(p._id)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

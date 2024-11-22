@@ -1,0 +1,65 @@
+<div class="container d-flex justify-content-center " ><h2>Crear Alquiler</h2></div> 
+<div class="container d-flex justify-content-center " >
+ 
+  <div class="form">
+    <form (submit)="crearAlquiler()">
+      <div class="mb-3 ">
+        <label for="plazoMeses" class="form-label">Plazo (Meses):</label>
+        <input type="number" id="plazoMeses" name="plazoMeses" [(ngModel)]="alquiler.plazoMeses" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="costoalquiler" class="form-label">Costo de Alquiler:</label>
+        <input type="number" id="costoalquiler" name="costoalquiler" [(ngModel)]="alquiler.costoalquiler" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha:</label>
+        <input type="date" id="fecha" name="fecha" [(ngModel)]="alquiler.fecha" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="local" class="form-label">Local:</label>
+        <select class="form-select" id="local" name="local" [(ngModel)]="alquiler.local._id" required>
+          <option *ngFor="let local of locales" [ngValue]="local._id">{{ local.titulo }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label for="propietario" class="form-label">Propietario:</label>
+        <select class="form-select" id="propietario" name="propietario" [(ngModel)]="alquiler.propietario._id" required>
+          <option *ngFor="let propietario of propietarios" [ngValue]="propietario._id">{{ propietario.apellido }}, {{ propietario.nombre }}</option>
+        </select>
+      </div>
+      <div class="container d-flex justify-content-center ">
+      <button type="submit" class="btn btn-primary ">Guardar</button>
+    </div>
+    </form>
+  </div>
+</div>
+ 
+<div class="container">
+  <h2>Lista de Cuotas</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Alquiler</th>
+        <th>Mes</th>
+        <th>Monto</th>
+        <th>Número de Cuota</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cuota of cuotas">
+        <td>{{ cuota._id }}</td>
+        <td>{{ cuota.alquiler }}</td>
+        <td>{{ cuota.mes }}</td>
+        <td>{{ cuota.monto }}</td>
+        <td>{{ cuota.nroCuota }}</td>
+        <td>{{ cuota.estado }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

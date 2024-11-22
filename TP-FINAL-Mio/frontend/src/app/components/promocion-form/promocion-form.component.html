@@ -1,0 +1,88 @@
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-4">Formulario de Promoción</h4>
+            <form #promocionForm="ngForm">
+              <!-- TITULO DE PROMOCION -->
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="titulo" name="titulo" required [(ngModel)]="promocion.titulo" #titulo="ngModel">
+                <label for="titulo">Título de la Promoción</label>
+                <div *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)" class="text-danger">
+                  <div *ngIf="titulo.errors?.['required']">Título es requerido.</div>
+                </div>
+              </div>
+              
+              <!-- DESCRIPCION DE PROMOCION -->
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="descripcion" name="descripcion" required [(ngModel)]="promocion.descripcion" #descripcion="ngModel">
+                <label for="descripcion">Descripción</label>
+                <div *ngIf="descripcion.invalid && (descripcion.dirty || descripcion.touched)" class="text-danger">
+                  <div *ngIf="descripcion.errors?.['required']">Descripción es requerida.</div>
+                </div>
+              </div>
+              
+              <!-- FECHA INICIO DE PROMOCION -->
+              <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required [(ngModel)]="promocion.fechaInicio" #fechaInicio="ngModel">
+                <label for="fechaInicio">Fecha de Inicio</label>
+                <div *ngIf="fechaInicio.invalid && (fechaInicio.dirty || fechaInicio.touched)" class="text-danger">
+                  <div *ngIf="fechaInicio.errors?.['required']">Fecha de Inicio es requerida.</div>
+                </div>
+              </div>
+              
+              <!-- FECHA FIN DE PROMOCION -->
+              <div class="form-floating mb-3">
+                <input type="date" class="form-control" id="fechaFin" name="fechaFin" required [(ngModel)]="promocion.fechaFin" #fechaFin="ngModel">
+                <label for="fechaFin">Fecha de Fin</label>
+                <div *ngIf="fechaFin.invalid && (fechaFin.dirty || fechaFin.touched)" class="text-danger">
+                  <div *ngIf="fechaFin.errors?.['required']">Fecha de Fin es requerida.</div>
+                </div>
+              </div>
+              
+              <!-- CATEGORIA -->
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="categoria" name="categoria" required [(ngModel)]="promocion.categoria" #categoria="ngModel">
+                <label for="categoria">Categoría</label>
+                <div *ngIf="categoria.invalid && (categoria.dirty || categoria.touched)" class="text-danger">
+                  <div *ngIf="categoria.errors?.['required']">Categoría es requerida.</div>
+                </div>
+              </div>
+              
+              <!-- LOCAL -->
+              <div class="form-floating mb-3">
+                <select class="form-select" name="local" id="local" [(ngModel)]="promocion.local" #local="ngModel" required>
+                  <option *ngFor="let l of locales" [ngValue]="l">{{ l.titulo }}</option>
+                </select>
+                <label for="local">Local</label>
+                <div *ngIf="local.invalid && (local.dirty || local.touched)" class="text-danger">
+                  <div *ngIf="local.errors?.['required']">Local es requerido.</div>
+                </div>
+              </div>
+              
+              <!-- IMAGEN -->
+              <div class="form-floating mb-3">
+                <div *ngIf="accion=='update'">
+                  <img [src]="promocion.imagen" class="img-fluid mb-3" alt="Imagen de promoción">
+                </div>
+                <div class="input-group">
+                  <input type="file" id="fileInput" name="imagen" accept="image/*" class="form-control form-control-sm" (change)="onFileSelected($event)">
+                  <label for="fileInput"></label>
+                </div>
+              </div>
+              
+              <!-- Botones -->
+              <div *ngIf="promocionForm.valid  && ['propietario'].includes(loginService.getUserRole() || '')" >
+                <button *ngIf="accion=='new'" type="submit" class="btn btn-info" (click)="registrarPromocion()">Registrar</button>
+                <button *ngIf="accion=='update'" type="submit" class="btn btn-info" (click)="actualizarPromocion()">Actualizar</button>
+              </div>
+              <div class="mt-4">
+                <button class="btn btn-info" (click)="volver()">Volver</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

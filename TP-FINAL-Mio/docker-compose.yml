@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "3000:3000"
+    networks:
+      - tp-final-mio_mongoCluster
+    environment:
+      - MONGO_URI=mongodb://mongo1,mongo2,mongo3/myDatabase?replicaSet=myReplicaSet
+    
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "4200:80"
+    networks:
+      - tp-final-mio_mongoCluster
+    depends_on:
+      - backend
+
+networks:
+  tp-final-mio_mongoCluster:
+    external: true

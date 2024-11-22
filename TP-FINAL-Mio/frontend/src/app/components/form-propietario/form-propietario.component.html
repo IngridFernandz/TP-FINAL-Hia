@@ -1,0 +1,134 @@
+<div class="container mt-4">
+  <form [formGroup]="formPropietario">
+    <div class="mb-3">
+      <label for="usuario" class="form-label">Usuario:</label>
+      <select class="form-select" formControlName="idUsuario">
+        <option *ngFor="let usuario of usuarios" [value]="usuario._id">
+          {{ usuario.email }} - {{ usuario.usuario }}
+        </option>
+      </select>
+    </div>
+    <!-- Apellido Propietario -->
+    <div class="mb-3">
+      <label for="apellidoPropietario" class="form-label"
+        >Ingrese el Apellido</label
+      >
+      <input
+        type="text"
+        id="apellidoPropietario"
+        class="form-control"
+        formControlName="apellido"
+      />
+      <div
+        *ngIf="
+          formPropietario.get('apellido')?.invalid &&
+          formPropietario.get('apellido')?.touched
+        "
+        class="text-danger"
+      >
+        Apellido es requerido.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="nombrePropietario" class="form-label"
+        >Ingrese el Nombre</label
+      >
+      <input
+        type="text"
+        id="nombrePropietario"
+        class="form-control"
+        formControlName="nombre"
+      />
+      <div
+        *ngIf="
+          formPropietario.get('nombre')?.invalid &&
+          formPropietario.get('nombre')?.touched
+        "
+        class="text-danger"
+      >
+        Nombre es requerido.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="dniPropietario" class="form-label">Ingrese el Dni</label>
+      <input
+        type="text"
+        id="dniPropietario"
+        class="form-control"
+        formControlName="dni"
+      />
+      <div
+        *ngIf="
+          formPropietario.get('dni')?.invalid &&
+          formPropietario.get('dni')?.touched
+        "
+        class="text-danger"
+      >
+        Dni es requerido.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="emailPropietario" class="form-label">Ingrese el Email</label>
+      <input
+        type="text"
+        id="emailPropietario"
+        class="form-control"
+        formControlName="email"
+      />
+      <div
+        *ngIf="
+          formPropietario.get('email')?.invalid &&
+          formPropietario.get('email')?.touched
+        "
+        class="text-danger"
+      >
+        Email es requerido.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="telefonoPropietario" class="form-label"
+        >Ingrese el telefono</label
+      >
+      <input
+        type="number"
+        id="telefonoPropietario"
+        class="form-control"
+        formControlName="telefono"
+      />
+      <div
+        *ngIf="
+          formPropietario.get('telefono')?.invalid &&
+          formPropietario.get('telefono')?.touched
+        "
+        class="number-danger"
+      >
+        Telefono es requerido.
+      </div>
+    </div>
+
+    <!-- Botones Guardar y Modificar -->
+    <div class="d-flex justify-content-between">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        *ngIf="nuevo"
+        (click)="addPropietario()"
+      >
+        Guardar
+      </button>
+      <button
+        type="submit"
+        class="btn btn-warning"
+        *ngIf="!nuevo"
+        (click)="editPropietario()"
+      >
+        Modificar
+      </button>
+      <button class="btn btn-info" (click)="volverLista()">Volver</button>
+    </div>
+  </form>
+</div>

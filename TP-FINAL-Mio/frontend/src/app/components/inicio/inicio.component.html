@@ -1,0 +1,167 @@
+<!-- carousel.component.html -->
+<div
+  id="carouselExampleIndicators"
+  class="carousel slide"
+  data-bs-ride="carousel"
+  data-bs-interval="2000"
+  data-bs-pause="false"
+>
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      *ngFor="let image of images; let i = index"
+      [attr.data-bs-target]="'#carouselExampleIndicators'"
+      [attr.data-bs-slide-to]="i"
+      [class.active]="i === 0"
+      aria-current="true"
+    ></button>
+  </div>
+  <div class="carousel-inner">
+    <div
+      *ngFor="let image of images; let i = index"
+      class="carousel-item"
+      [class.active]="i === 0"
+    >
+      <img [src]="image" class="d-block w-100" alt="..." />
+    </div>
+  </div>
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#carouselExampleIndicators"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- description.component.html -->
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2>AKIRA</h2>
+    </div>
+    <div class="col-md-6">
+      <p>
+        Somos el primer shopping de Jujuy y el más reconocido en el norte
+        argentino. En AKIRA contamos con un gran mix de marcas comerciales que
+        se pueden encontrar tanto en locales como góndolas, entretenimiento y
+        servicios; un tradicional patio de comidas y un gran corredor
+        gastronómico externo con muchísimas opciones gastronómicas para brindar
+        una experiencia completa.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <p>
+        Especializados en la familia, contamos con eventos, activaciones y
+        descuentos importantes todas las semanas para que nuestros clientes
+        estén en constante descubrimiento y recurrencia en el shopping. La
+        constancia, dedicación y experiencia son factores y premisas esenciales
+        en nuestro equipo de trabajo para brindar la mejor calidad y experiencia
+        AKIRA. Te invitamos a conocernos en uno de los puntos más importante de
+        la ciudad de San Salvador de Jujuy, cercano al centro y zonas
+        turísticas.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- stores.component.html -->
+<div class="mt-5 bg-dark-blue">
+  <div class="row">
+    <div class="col-12 text-center">
+      <h2>NUESTROS LOCALES</h2>
+    </div>
+  </div>
+  <div class="row w-100">
+    <div
+      *ngFor="let local of locales; let i = index"
+      class="col-md-3 col-sm-6 col-12"
+      style="padding: 20px"
+    >
+      <div class="card h-100">
+        <img src="{{ local.imagen }}" alt="" class="card-img-top" />
+        <div class="card-body">
+          <h5 class="card-title">{{ local.titulo }}</h5>
+          <!-- Si está alquilado y es cliente, no se muestra -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="follow-us-section">
+  <div class="container text-center py-5">
+    <h1 class="follow-us-title">Seguinos en Instagram</h1>
+    <p class="follow-us-handle">&#64;akirashopping</p>
+    <img
+      src="assets/ig.png"
+      alt="Texto alternativo de la imagen"
+      class="img-fluid mt-3"
+    />
+  </div>
+</div>
+
+<!-- <div class="container justify-content-center">
+  <div class="row m-5 d-flex">
+    <div class="col md-9">
+      <h2>Productos</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let p of promociones">
+      <div class="card" style="width: 18rem">
+        <img [src]="p.imagen" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ p.nombre }}</h5>
+          <h5 class="card-title">${{ p.descripcion }}</h5>
+          <p class="card-text">{{ p.fechaInicio }}</p>
+          <p class="card-text">{{ p.fechaFin }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- promotions.component.html -->
+<div class="container justify-content-center">
+  <div class="row m-5 d-flex justify-content-center">
+    <div class="col-md-9 text-center">
+      <h2 class="section-title">NOVEDADES &amp; PROMOCIONES</h2>
+      <p class="section-description">
+        Enterate de lo último que tenemos para contarte
+      </p>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-4 mb-4" *ngFor="let p of promociones">
+      <div class="card promotion-card">
+        <img [src]="p.imagen" class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">{{ p.titulo }}</h5>
+          <p class="card-text">{{ p.descripcion }}</p>
+          <p class="card-text">
+            Valida desde
+            {{ p.fechaInicio | date : "dd/MM/yyyy" }} hasta
+            {{ p.fechaFin | date : "dd/MM/yyyy" }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="scroll-to-top" style="display: none">
+  <button class="scroll-top-button" (click)="scrollToTop()">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+</div>

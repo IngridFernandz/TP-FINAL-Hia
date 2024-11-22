@@ -1,0 +1,30 @@
+.container {
+    margin-top: 20px;
+  }
+  
+  .form {
+    background-color: #799abb; /* Color de fondo del formulario */
+    padding: 20px;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    width: 40rem;
+   
+
+
+  }
+  
+  .form-label {
+    font-weight: bold; /* Texto en negrita para etiquetas */
+  }
+  
+  .form-control,
+  .form-select {
+    /* width: 60%; Ancho completo para controles */
+    margin-bottom: 10px; /* Espacio inferior entre controles */
+  }
+  
+  .btn-primary {
+    
+    width: 15rem; /* Ancho completo para el botón */
+  }
+  

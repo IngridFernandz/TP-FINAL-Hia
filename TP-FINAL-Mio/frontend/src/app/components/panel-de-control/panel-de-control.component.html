@@ -1,0 +1,121 @@
+<div class="container">
+  <h1 style="text-align: center;">Panel de Control</h1>
+
+  <!-- Gráficos -->
+  <div class="row" style="display: flex; justify-content: space-between;">
+    <!-- LOCALES -->
+     <h3 class="mt-3 mb-4">Estadísticas de Ocupación: Locales</h3>
+    <div class="col-md-4">
+      <!-- Gráfico de locales alquilados -->
+      <h5 class="mt-3 mb-4">Alquilados/No Alquilados</h5>
+      <ngx-charts-advanced-pie-chart
+        [view]="view"
+        scheme="cool"
+        [results]="localesAlquiladosChart"
+        [gradient]="gradient"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        style="flex: 1;"
+      >
+      </ngx-charts-advanced-pie-chart>
+    </div>
+    <div class="col-md-4">
+      <!-- Gráfico de locales habilitados -->
+       <h5 class="mt-3 mb-4">Habilitados/Deshabilitados</h5>
+      <ngx-charts-advanced-pie-chart
+        [view]="view"
+        scheme="cool"
+        [results]="localesHabilitadosChart"
+        [gradient]="gradient"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        style="flex: 1;"
+      >
+      </ngx-charts-advanced-pie-chart>
+    </div>
+    <div class="col-md-4">
+      <!-- Gráfico de todos los locales -->
+       <h5 class="mt-3 mb-4">Todos los Locales</h5>
+      <ngx-charts-advanced-pie-chart
+        [view]="view"
+        scheme="cool"
+        [results]="todosLosLocalesChart"
+        [gradient]="gradient"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        style="flex: 1;"
+      >
+      </ngx-charts-advanced-pie-chart>
+    </div>
+
+    <!-- Botones -->
+    <div style="margin-bottom: 20px;">
+      <button class="btn btn-primary" (click)="obtenerLocales()">Obtener Locales</button>
+    </div>
+
+    <!-- PAGOS -->
+    <h3 class="mt-3 mb-4">Estadísticas Financieras: Pagos</h3>
+    <!-- Selector de mes -->
+    <div style="margin-bottom: 20px;">
+      <label for="mesSelector">Seleccione un mes:</label>
+      <select id="mesSelector" class="form-control" [(ngModel)]="mes" (change)="filtrarPagosPorMes(mes)">
+        <option value="Enero">Enero</option>
+        <option value="Febrero">Febrero</option>
+        <option value="Marzo">Marzo</option>
+        <option value="Abril">Abril</option>
+        <option value="Mayo">Mayo</option>
+        <option value="Junio">Junio</option>
+        <option value="Julio">Julio</option>
+        <option value="Agosto">Agosto</option>
+        <option value="Septiembre">Septiembre</option>
+        <option value="Octubre">Octubre</option>
+        <option value="Noviembre">Noviembre</option>
+        <option value="Diciembre">Diciembre</option>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <!-- Gráfico de todos los pagos -->
+       <h5 class="mt-3 mb-4">Todos los Pagos</h5>
+      <ngx-charts-advanced-pie-chart
+        [view]="view"
+        scheme="vivid"
+        [results]="todosLosPagosChart"
+        [gradient]="gradient"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        style="flex: 1;"
+      >
+      </ngx-charts-advanced-pie-chart>
+    </div>
+    <div class="col-md-6">
+      <!-- Gráfico de pagos -->
+       <h5 class="mt-3 mb-4">Pagos por Mes</h5>
+      <ngx-charts-advanced-pie-chart
+        [view]="view"
+        scheme="vivid"
+        [results]="pagosChart"
+        [gradient]="gradient"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        style="flex: 1;"
+      >
+      </ngx-charts-advanced-pie-chart>
+    </div>
+
+    
+    <!-- Botones -->
+    <div style="margin-bottom: 20px;">
+      <button class="btn btn-primary" (click)="obtenerTodosLosPagos()" style="margin-left: 10px;">Obtener Pagos</button>
+    </div>
+  </div>
+  
+  
+</div>
+
+
+

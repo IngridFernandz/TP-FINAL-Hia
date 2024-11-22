@@ -1,0 +1,33 @@
+.consulta-card {
+  width: 100%;
+  border: 1px solid #dee2e6;
+  border-radius: 0rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+}
+
+.consulta-card:not(:last-child) {
+  margin-bottom: 0; /* Sin espacio entre divs */
+}
+
+.consulta-card:hover {
+  background-color: #e0e0e0; /* Gris claro */
+}
+
+.consulta-text {
+  color: rgb(0, 22, 57);
+  font-size: 1.2rem; /* Ajusta el tamaño de la fuente (14px) */
+  font-weight: bold;
+}
+
+.consulta-negrita {
+  font-weight: bold;
+  font-size: 0.875rem; /* Ajusta el tamaño de la fuente (14px) */
+}
+
+.btn-resuelto {
+  background-color: navy;
+  color: white;
+  border-radius: 0; /* Botón cuadrado */
+  font-size: 0.875rem; /* Ajusta el tamaño de la fuente (14px) */
+}

@@ -1,0 +1,101 @@
+<div class="container">
+  <div class="row">
+    <!-- Columna del formulario -->
+    <div class="col-md-6">
+      <form [formGroup]="formulario" (ngSubmit)="createConsulta()">
+        <h2>Escribinos</h2>
+        <div class="form-group">
+          <label for="nombreCompleto">Nombre y Apellido</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="nombreCompleto"
+            placeholder="Nombre y Apellido"
+          />
+          <div
+            *ngIf="
+              formulario.get('nombreCompleto')?.invalid &&
+              (formulario.get('nombreCompleto')?.dirty ||
+                formulario.get('nombreCompleto')?.touched)
+            "
+            class="text-danger"
+          >
+            Nombre y Apellido son requeridos
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            formControlName="email"
+            placeholder="Email"
+          />
+          <div
+            *ngIf="
+              formulario.get('email')?.invalid &&
+              (formulario.get('email')?.dirty ||
+                formulario.get('email')?.touched)
+            "
+            class="text-danger"
+          >
+            Email es requerido y debe tener un formato válido
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="consulta">Consulta</label>
+          <textarea
+            class="form-control"
+            formControlName="consulta"
+            rows="5"
+            placeholder="Consulta"
+          ></textarea>
+          <div
+            *ngIf="
+              formulario.get('consulta')?.invalid &&
+              (formulario.get('consulta')?.dirty ||
+                formulario.get('consulta')?.touched)
+            "
+            class="text-danger"
+          >
+            Consulta es requerida
+          </div>
+          <re-captcha
+            (resolved)="executeReCaptcha($event)"
+            siteKey="6Lc6LQ0qAAAAAL6slmwdLvy7H6zs7gWjsqHwuxvh"
+          >
+          </re-captcha>
+          <div
+            *ngIf="!recaptchaChecked && formulario.get('consulta')?.touched"
+            class="text-danger"
+          >
+            Por favor, completa la verificación reCAPTCHA.
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Enviar</button>
+      </form>
+    </div>
+    <!-- Columna de información adicional -->
+    <div class="col-md-6">
+      <div class="ubicacion">
+        <h3 style="color: #001f3f">Dónde estamos</h3>
+        <p>
+          Calle Belgrano 1500<br />
+          Jujuy / Argentina<br />
+          Tel: 0800 222 2299<br />
+          Locales Comerciales: Lunes a Domingo y Feriados: 10:00 / 22:00 hs<br />
+          Locales Gastronómicos: Lunes a Domingo y Feriados: 10:00 / 00:00 hs
+        </p>
+      </div>
+      <div class="como-llegar">
+        <h3 style="color: #001f3f">Cómo llegar</h3>
+        <div class="colectivos">
+          <div style="color: #001f3f">Colectivo / Líneas:</div>
+          <div>
+            14 / 13 / 47 / 100 (Urbanos) / 1 / 3 / 7 / 21 / 23 / 57 (San Jorge)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
