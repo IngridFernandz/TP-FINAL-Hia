@@ -5,4 +5,11 @@ scrape_configs:
   - job_name: "mongodb-sniffer"
     static_configs:
       - targets:
-        - "esperluet_percona_mongodb_exporter:9216"
+        - "percona_mongodb_exporter:9216"
+  - job_name: watchtower
+    scrape_interval: 5s
+    metrics_path: /v1/metrics
+    bearer_token: demotoken
+    static_configs:
+      - targets:
+        - 'watchtower:8080'

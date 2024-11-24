@@ -1,28 +1,30 @@
 services:
   backend:
-    build:
-      context: ./backend
+    image: ingridft/backendhia:latest   # Aquí debes poner la imagen desde Docker Hub
     container_name: backend
     ports:
       - "3000:3000"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     networks:
       - tp-final-mio_mongoCluster
     environment:
       - MONGO_URI=mongodb://mongo1,mongo2,mongo3/myDatabase?replicaSet=myReplicaSet
     
   frontend:
-    build:
-      context: ./frontend
+    image: ingridft/frontendhia:latest   # Aquí debes poner la imagen desde Docker Hub
     container_name: frontend
     ports:
       - "4200:80"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     networks:
       - tp-final-mio_mongoCluster
     depends_on:
       - backend
-  esperluet_percona_mongodb_exporter:
+  percona_mongodb_exporter:
     image: percona/mongodb_exporter:0.40
-    container_name: esperluet_percona_mongodb_exporter
+    container_name: percona_mongodb_exporter
     restart: always
     ports:
       - 9216:9216
@@ -32,14 +34,16 @@ services:
       - '--discovering-mode'
       - '--compatible-mode'
       - '--mongodb.collstats-colls=admin.companies,admin.restaurants'
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     networks:
       - tp-final-mio_mongoCluster
     environment:
       WAIT_HOSTS: esperluet_mongodb:27017
       MONGODB_URI: mongodb://mongo1,mongo2,mongo3/myDatabase?replicaSet=myReplicaSet
 
-  esperluet_prometheus:
-    container_name: esperluet_prometheus
+  prometheus:
+    container_name: prometheushia
     build:
       context: ./prometheus
       dockerfile: Dockerfile
@@ -47,20 +51,40 @@ services:
       - 9090:9090
     volumes:
        - ./prometheus/:/prometheus/
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     networks:
       - tp-final-mio_mongoCluster
 
-  esperluet_grafana:
+  grafana:
     image: grafana/grafana
-    container_name: esperluet_grafana
+    container_name: grafanahia
     restart: unless-stopped
     user: root
     volumes:
       - ./grafana/grafana-data/:/var/lib/grafana/
     ports:
       - 8186:3000
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     networks:
       - tp-final-mio_mongoCluster
+
+
+  watchtower:
+      image: containrrr/watchtower
+      container_name: watchtower
+      command: --http-api-metrics --http-api-token demotoken --label-enable --cleanup --interval 10 # Solo monitorea los contenedores con la etiqueta enable=true
+      environment:
+        - WATCHTOWER_HTTP_API_TOKEN=demotoken
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock  # Para acceder a Docker
+      ports:
+        - 8080:8080 
+      labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+      networks:
+            - tp-final-mio_mongoCluster
 networks:
   tp-final-mio_mongoCluster:
     external: true
