@@ -20,7 +20,47 @@ services:
       - tp-final-mio_mongoCluster
     depends_on:
       - backend
+  esperluet_percona_mongodb_exporter:
+    image: percona/mongodb_exporter:0.40
+    container_name: esperluet_percona_mongodb_exporter
+    restart: always
+    ports:
+      - 9216:9216
+    command:
+      - '--mongodb.global-conn-pool'
+      - '--collector.diagnosticdata'
+      - '--discovering-mode'
+      - '--compatible-mode'
+      - '--mongodb.collstats-colls=admin.companies,admin.restaurants'
+    networks:
+      - tp-final-mio_mongoCluster
+    environment:
+      WAIT_HOSTS: esperluet_mongodb:27017
+      MONGODB_URI: mongodb://mongo1,mongo2,mongo3/myDatabase?replicaSet=myReplicaSet
 
+  esperluet_prometheus:
+    container_name: esperluet_prometheus
+    build:
+      context: ./prometheus
+      dockerfile: Dockerfile
+    ports:
+      - 9090:9090
+    volumes:
+       - ./prometheus/:/prometheus/
+    networks:
+      - tp-final-mio_mongoCluster
+
+  esperluet_grafana:
+    image: grafana/grafana
+    container_name: esperluet_grafana
+    restart: unless-stopped
+    user: root
+    volumes:
+      - ./grafana/grafana-data/:/var/lib/grafana/
+    ports:
+      - 8186:3000
+    networks:
+      - tp-final-mio_mongoCluster
 networks:
   tp-final-mio_mongoCluster:
     external: true
