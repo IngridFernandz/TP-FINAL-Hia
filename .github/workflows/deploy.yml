@@ -3,7 +3,10 @@ name: Publicar imagenes
 
 on:
   push:
-    branches: ['main']
+    branches:
+      - main
+    tags:
+      - 'v*'
 
 
 jobs:
@@ -27,6 +30,18 @@ jobs:
           file: ./TP-FINAL-Mio/backend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/backendhia:latest
+      - name: Pull the latest backend image from Docker Hub
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USER }}/backendhia:latest
+      - name: Stop and remove old backend container
+        run: |
+          docker stop backend || true
+          docker rm backend || true
+      - name: Run the latest backend container
+        run: |
+          docker run -d --name backend --network tp-final-mio_mongoCluster ${{ secrets.DOCKERHUB_USER }}/backendhia:latest
+
+
   build-frontend:
     runs-on: ubuntu-latest
     environment: dockerHub
@@ -47,3 +62,16 @@ jobs:
           file: ./TP-FINAL-Mio/frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USER }}/frontendhia:latest
+      - name: Pull the latest frontend image from Docker Hub
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USER }}/frontendhia:latest
+      - name: Stop and remove old frontend container
+        run: |
+          docker stop frontend || true
+          docker rm frontend || true
+      - name: Run the latest frontend container
+        run: |
+          docker run -d --name frontend --network tp-final-mio_mongoCluster ${{ secrets.DOCKERHUB_USER }}/frontendhia:latest
+
+
+
