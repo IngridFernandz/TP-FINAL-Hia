@@ -4,8 +4,7 @@ name: Publicar imagenes
 on:
   push:
     branches: ['main']
-    tags:
-      - '*' 
+
 
 jobs:
   build-backend:
