@@ -39,7 +39,7 @@ services:
     networks:
       - tp-final-mio_mongoCluster
     environment:
-      WAIT_HOSTS: esperluet_mongodb:27017
+      #WAIT_HOSTS: esperluet_mongodb:27017
       MONGODB_URI: mongodb://mongo1,mongo2,mongo3/myDatabase?replicaSet=myReplicaSet
 
   prometheus:
