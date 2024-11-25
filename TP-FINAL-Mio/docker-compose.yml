@@ -99,6 +99,19 @@ services:
       - "com.centurylinklabs.watchtower.enable=false"
     networks:
       - tp-final-mio_mongoCluster
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo1
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+    ports:
+      - "8081:8081"
+    networks:
+      - tp-final-mio_mongoCluster
 networks:
   tp-final-mio_mongoCluster:
     external: true
